@@ -1,0 +1,13 @@
+Gemini Image Prompt — Obsidian Vault Assistant Banner
+
+Ultrawide horizontal banner, 1920x480 pixels.
+
+Background: deep dark navy #1a1f2e with very subtle diagonal grid texture, not flat.
+
+Visual element: A cinematic abstract data flow network concentrated on the RIGHT three-quarters of the image. Floating markdown note fragments and calendar grid nodes connected by thin glowing lines, resembling a daily note vault coming alive. Colors transition from cyan #00d4ff on the far right edge toward soft amber #f0c27a toward the center. The effect is sophisticated and tech-forward with a warm AI assistant mood.
+
+Text zone: The LEFT quarter of the image is intentionally kept clean and dark with only faint data lines fading in from the right. This is the dedicated text area.
+
+Text: In the left quarter, vertically centered, bold crisp WHITE sans-serif text reads "VAULT ASSISTANT" — all words on a SINGLE horizontal line, font size restrained so it does not wrap or stack. Directly below in smaller light gray #a0aec0 text: "obsidian vault automation & ai greeting". Text is sharp, modern, and fully legible. It does not overlap with any bright visual elements.
+
+Details: A small white terminal cursor ▊ in the bottom right corner. No humans, no faces, no biological cells or medical imagery. Cinematic depth of field. Aspect ratio 4:1 ultra-wide landscape orientation only.

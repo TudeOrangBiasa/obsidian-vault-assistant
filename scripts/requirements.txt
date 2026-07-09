@@ -1,0 +1,5 @@
+# Core dependencies (stdlib-only scripts don't need these)
+# google-api-python-client and google-auth-oauthlib are ONLY needed for
+# calendar_sync.py — skip if you don't use Google Calendar sync.
+# google-api-python-client>=2.0
+# google-auth-oauthlib>=1.0
