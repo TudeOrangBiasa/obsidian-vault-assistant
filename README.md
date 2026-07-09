@@ -1,4 +1,4 @@
-![Vault Assistant Banner](assets/banner.png)
+![Vault Assistant Banner](assets/banner.jpg)
 
 # Obsidian Vault Assistant
 
@@ -143,7 +143,7 @@ obsidian-vault-assistant/
 ├── skill/
 │   └── SKILL.md                  OpenCode skill
 └── assets/
-    └── banner.png                repo banner
+    └── banner.jpg                repo banner
 ```
 
 ## License
