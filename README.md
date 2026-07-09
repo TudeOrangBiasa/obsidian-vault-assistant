@@ -31,11 +31,12 @@ It generates your weekly review from the data your daily notes already have. KPI
 
 - Bash 4, Python 3.8+
 - An Obsidian vault with daily/, weekly/, _logs/ structure
+- [Obsidian plugins](docs/obsidian-plugins.md): Dataview, Obsidian Charts, Templater
 
 Optional:
 - gh CLI (for blocked and next issue tracking)
 - OpenCode + OpenViking (for proactive AI greeting)
-- Google Calendar API (for calendar sync)
+- [Google Calendar API](docs/google-calendar-setup.md) (for calendar sync)
 
 ## Install
 
@@ -46,6 +47,18 @@ bash install.sh
 ```
 
 The wizard walks through vault path, GitHub repo (optional), cron schedule, and OpenCode registration. Five minutes.
+
+## Before You Start
+
+Your vault needs three Obsidian plugins. Install them from Settings → Community plugins:
+
+- [Dataview](https://obsidian.md/plugins?id=dataview) — KPI markers and weekly stats
+- [Obsidian Charts](https://obsidian.md/plugins?id=obsidian-charts) — KPI trend charts
+- [Templater](https://obsidian.md/plugins?id=templater-obsidian) — dynamic templates
+
+See [docs/obsidian-plugins.md](docs/obsidian-plugins.md) for setup instructions and optional plugins.
+
+Want Google Calendar sync? Follow [docs/google-calendar-setup.md](docs/google-calendar-setup.md).
 
 ## Usage
 
@@ -129,6 +142,9 @@ obsidian-vault-assistant/
 ├── install.sh                    setup wizard
 ├── config.example.sh             config template
 ├── config.sh                     your config (generated)
+├── docs/
+│   ├── obsidian-plugins.md       plugin guide
+│   └── google-calendar-setup.md  GCP + OAuth tutorial
 ├── scripts/
 │   ├── load_config.sh            shared config loader
 │   ├── vault-status.sh           system status to JSON
