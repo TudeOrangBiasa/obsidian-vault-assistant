@@ -217,13 +217,23 @@ def generate_retro_suggestions(delta: dict, aggregates: dict,
 
 
 def run_gh_query(label: str) -> list:
-    """Run gh CLI to get issues with a given label. Returns list of issue dicts."""
-    repo = os.environ.get('GH_REPO', '')
-    if not repo:
+    """Run gh CLI to get issues with a given label. Returns list of issue dicts.
+    Searches all repos under GH_OWNER (config or auto-detected from gh auth)."""
+    owner = os.environ.get('GH_OWNER', '')
+    # Auto-detect owner from gh auth if not configured
+    if not owner:
+        try:
+            r = subprocess.run(["gh", "api", "user", "--jq", ".login"],
+                               capture_output=True, text=True, timeout=10)
+            if r.returncode == 0:
+                owner = r.stdout.strip()
+        except (subprocess.TimeoutExpired, FileNotFoundError):
+            pass
+    if not owner:
         return []
     try:
         result = subprocess.run(
-            ["gh", "search", "issues", "--repo", repo, "--label", label,
+            ["gh", "search", "issues", "--owner", owner, "--label", label,
              "--state", "open", "--json", "number,title,url", "--limit", "10"],
             capture_output=True, text=True, timeout=15
         )

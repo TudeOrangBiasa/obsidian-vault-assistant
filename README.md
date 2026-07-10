@@ -102,7 +102,7 @@ Copy `config.example.sh` to `config.sh` and set your vault path. Or run `bash in
 
 ```bash
 VAULT_DIR="/path/to/vault"
-GH_REPO="username/repo"         # optional, for issues
+GH_OWNER="your-github-username"     # optional, for issues across all repos
 ```
 
 ## OpenCode Integration

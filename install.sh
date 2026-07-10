@@ -52,16 +52,17 @@ echo -e "  ${GREEN}✓${NC} Vault: $VAULT_DIR"
 mkdir -p "$VAULT_DIR"/{daily,weekly} "$VAULT_DIR"/_logs/{kpi,trends} 2>/dev/null
 echo -e "  ${GREEN}✓${NC} Created: daily, weekly, _logs/{kpi,trends}"
 
-# ===== 2. GitHub repo (optional) =====
+# ===== 2. GitHub owner (optional) =====
 echo ""
 echo -e "${BOLD}GitHub Integration${NC} (optional)"
 echo "Used by vault-status.sh and weekly_fill.py for blocked/next issue tracking."
+echo "Searches ALL repos under this GitHub username/org."
 echo "Requires 'gh' CLI to be installed and authenticated."
-echo -n "GitHub repo (e.g. 'username/repo' or press Enter to skip): "
-read -r GH_REPO_INPUT
-GH_REPO="${GH_REPO_INPUT:-}"
-if [ -n "$GH_REPO" ]; then
-  echo -e "  ${GREEN}✓${NC} GitHub: $GH_REPO"
+echo -n "GitHub username (e.g. 'your-username' or press Enter to skip): "
+read -r GH_OWNER_INPUT
+GH_OWNER="${GH_OWNER_INPUT:-}"
+if [ -n "$GH_OWNER" ]; then
+  echo -e "  ${GREEN}✓${NC} GitHub owner: $GH_OWNER"
 else
   echo -e "  ${YELLOW}⚠${NC} Skipped (no GitHub integration)"
 fi
@@ -102,8 +103,8 @@ DAILY_CRON_TIME="${DAILY_MIN} ${DAILY_HOUR} * * *"
 WEEKLY_CRON_TIME="${WEEKLY_MIN} ${WEEKLY_HOUR} * * 1"
 CONFIGEOF
 
-if [ -n "$GH_REPO" ]; then
-  echo "GH_REPO=\"$GH_REPO\"" >> "$SCRIPT_DIR/config.sh"
+if [ -n "$GH_OWNER" ]; then
+  echo "GH_OWNER=\"$GH_OWNER\"" >> "$SCRIPT_DIR/config.sh"
 fi
 
 echo -e "\n  ${GREEN}✓${NC} Created: config.sh"
@@ -184,7 +185,7 @@ if [[ ! "$REGISTER_SKILL" =~ ^[Nn] ]]; then
 fi
 
 # ===== 8. GitHub auth check =====
-if [ -n "$GH_REPO" ]; then
+if [ -n "$GH_OWNER" ]; then
   echo ""
   echo -e "${BOLD}GitHub Auth${NC}"
   if command -v gh &>/dev/null; then

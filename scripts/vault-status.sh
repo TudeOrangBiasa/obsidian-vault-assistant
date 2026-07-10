@@ -120,8 +120,12 @@ done
 
 # ===== 3. Blocked count (via gh CLI) =====
 BLOCKED_COUNT=0
-if command -v gh &>/dev/null && [ -n "${GH_REPO:-}" ]; then
-  BLOCKED_OUTPUT=$(timeout 10 gh search issues --repo "$GH_REPO" --label=blocked --state=open --json=number --limit=50 2>/dev/null)
+GH_OWNER="${GH_OWNER:-}"
+if [ -z "$GH_OWNER" ] && command -v gh &>/dev/null; then
+  GH_OWNER=$(gh api user --jq '.login' 2>/dev/null || echo "")
+fi
+if command -v gh &>/dev/null && [ -n "$GH_OWNER" ]; then
+  BLOCKED_OUTPUT=$(timeout 10 gh search issues --owner "$GH_OWNER" --label=blocked --state=open --json=number --limit=50 2>/dev/null)
   if [ $? -eq 0 ]; then
     BLOCKED_COUNT=$(echo "$BLOCKED_OUTPUT" | python3 -c "import json,sys; print(len(json.load(sys.stdin)))" 2>/dev/null || echo 0)
   fi
@@ -153,8 +157,8 @@ fi
 
 # ===== 6. Next issues count =====
 NEXT_COUNT=0
-if command -v gh &>/dev/null && [ -n "${GH_REPO:-}" ]; then
-  NEXT_OUTPUT=$(timeout 10 gh search issues --repo "$GH_REPO" --label=next --state=open --json=number --limit=50 2>/dev/null)
+if command -v gh &>/dev/null && [ -n "$GH_OWNER" ]; then
+  NEXT_OUTPUT=$(timeout 10 gh search issues --owner "$GH_OWNER" --label=next --state=open --json=number --limit=50 2>/dev/null)
   if [ $? -eq 0 ]; then
     NEXT_COUNT=$(echo "$NEXT_OUTPUT" | python3 -c "import json,sys; print(len(json.load(sys.stdin)))" 2>/dev/null || echo 0)
   fi

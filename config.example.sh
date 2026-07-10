@@ -24,9 +24,10 @@ LOG_DIR=""
 DAILY_CRON_TIME="0 6 * * *"     # 06:00 every day
 WEEKLY_CRON_TIME="0 7 * * 1"    # 07:00 every Monday
 
-# GitHub repo for blocked/next issue tracking (optional)
-# If set, vault-status.sh and weekly_fill.py will query gh CLI
-# GH_REPO="your-username/your-repo"
+# GitHub blocked/next issue tracking (optional)
+# vault-status.sh and weekly_fill.py will search ALL repos under this owner.
+# If unset, log in with `gh auth login` and it uses your default owner.
+GH_OWNER=""
 
 # Telemetry: KPI directory (default: $VAULT_DIR/_logs/kpi)
 KPI_DIR=""
