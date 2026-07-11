@@ -1,5 +1,5 @@
 #!/bin/bash
-# daily-cron.sh — Daily vault telemetry + sync (8 steps).
+# daily-cron.sh — Daily vault telemetry + sync (10 steps).
 # Runs every morning to collect KPI data and sync.
 #
 # Timing: 06:00 daily (processes yesterday's data).
@@ -28,7 +28,7 @@ trap 'rm -rf "$LOCK_FILE"' EXIT
 {
   echo "=== Daily Cron ($DATE_YESTERDAY) ==="
   echo "Start: $(date -Iseconds)"
-  TOTAL=9
+  TOTAL=10
 
   # Step 1: Ensure today's daily note exists
   echo "[1/$TOTAL] Daily note check..."
@@ -129,8 +129,17 @@ NOTE
     echo "[8/$TOTAL] Calendar sync — SKIP (script not found)"
   fi
 
-  # Step 9: Validate daily note
-  echo "[9/$TOTAL] Validate daily..."
+  # Step 9: Calendar fetch (events → daily note)
+  if [ -f "$SCRIPTS_DIR/calendar_sync.py" ]; then
+    echo "[9/$TOTAL] Calendar fetch..."
+    python3 "$SCRIPTS_DIR/calendar_sync.py" --fetch-events "$DATE_YESTERDAY" 2>&1
+    echo "[OK] Calendar fetch done"
+  else
+    echo "[9/$TOTAL] Calendar fetch — SKIP (script not found)"
+  fi
+
+  # Step 10: Validate daily note
+  echo "[10/$TOTAL] Validate daily..."
   python3 "$VALIDATE_SCRIPT" --date "$DATE_YESTERDAY" 2>&1
   echo "[OK] Validate done"
 
